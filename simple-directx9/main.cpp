@@ -279,6 +279,12 @@ void Render()
     static float f = 0.0f;
     f += 0.01f;
 
+    static float t = 0.0f;
+    t += 0.05f;
+
+    hResult = g_pEffect->SetFloat("g_t", t);
+    assert(hResult == S_OK);
+
     D3DXMATRIX mat;
     D3DXMATRIX View, Proj;
 
