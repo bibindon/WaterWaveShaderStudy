@@ -14,7 +14,7 @@ sampler textureSampler = sampler_state
 };
 
 float g_t = 0.0f;
-float g_normalEps = 0.05f; // 頂点ピッチに合わせ 0.02〜0.2 くらいで調整
+float g_normalEps = 0.5f; // 頂点ピッチに合わせ 0.02〜0.2 くらいで調整
 
 // 元の波変形ロジック（オブジェクト空間）を関数化
 float3 DeformObj(float3 p)
@@ -27,34 +27,34 @@ float3 DeformObj(float3 p)
     q.y += sin(g_t + q.z * 0.3) * 0.3f;
     q.z += cos(g_t + q.z * 0.3) * 0.3f;
 
-    float g_t2 = (g_t * 1.2) + 1.2;
+    float g_t2 = (g_t * 1.2) + q.x + q.z;
     q.y += sin(g_t2 + q.x * 8.1) * 0.01f;
     q.x += cos(g_t2 + q.x * 8.1) * 0.01f;
     q.y += sin(g_t2 + q.z * 8.1) * 0.01f;
     q.z += cos(g_t2 + q.z * 8.1) * 0.01f;
 
-    float g_t3 = (g_t * 0.7) + 0.7;
-    q.y += sin(g_t3 + q.x * 0.7) * 0.3f;
+    float g_t3 = (g_t * 0.7) + q.x + q.z;
+    q.y += sin(g_t3 + q.x * 0.7) * 0.1f;
     q.x += cos(g_t3 + q.x * 0.7) * 0.3f;
-    q.y += sin(g_t3 + q.z * 0.5) * 0.3f;
+    q.y += sin(g_t3 + q.z * 0.5) * 0.1f;
     q.z += cos(g_t3 + q.z * 0.5) * 0.3f;
 
-    float g_t4 = (g_t * 1.8) + 0.8;
-    q.y += sin(g_t4 + q.x * 25.7) * 0.002f;
-    q.x += cos(g_t4 + q.x * 25.7) * 0.01f;
-    q.y += sin(g_t4 + q.z * 30.5) * 0.002f;
-    q.z += cos(g_t4 + q.z * 30.5) * 0.01f;
+    float g_t4 = (g_t * 1.8) + q.z * q.z;
+    q.y += sin(g_t4 + q.x * q.z * 5) * 0.005f;
+    q.x += cos(g_t4 + q.x * q.z * 5) * 0.02f;
+    q.y += sin(g_t4 + q.z * q.z * 5) * 0.015f;
+    q.z += cos(g_t4 + q.z * q.z * 5) * 0.02f;
 
-    float g_t5 = (g_t + 1.5) * 0.7;
+    float g_t5 = (g_t * 1.5) + q.x;
     q.y += sin(g_t5 + q.x) * 0.2f;
     q.x += cos(g_t5 + q.x) * 0.2f;
     q.y += sin(g_t5 + q.z) * 0.2f;
     q.z += cos(g_t5 + q.z) * 0.2f;
 
-    float g_t6 = (g_t * 1.7) + 1.7;
-    q.y += sin(g_t6 + q.x * 0.3) * 0.3f;
+    float g_t6 = (g_t * 1.7) + q.z;
+    q.y += sin(g_t6 + q.x * 0.3) * 0.1f;
     q.x += cos(g_t6 + q.x * 0.3) * 0.3f;
-    q.y += sin(g_t6 + q.z * 0.4) * 0.3f;
+    q.y += sin(g_t6 + q.z * 0.4) * 0.1f;
     q.z += cos(g_t6 + q.z * 0.4) * 0.3f;
 
     return q;
