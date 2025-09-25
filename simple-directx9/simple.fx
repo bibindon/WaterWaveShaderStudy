@@ -16,6 +16,8 @@ sampler textureSampler = sampler_state
 float g_t = 0.0f;
 float g_normalEps = 0.5f; // 頂点ピッチに合わせ 0.02〜0.2 くらいで調整
 
+float g_height = 0.4f;
+
 // 元の波変形ロジック（オブジェクト空間）を関数化
 float3 DeformObj(float3 p)
 {
@@ -56,6 +58,8 @@ float3 DeformObj(float3 p)
     q.x += cos(g_t6 + q.x * 0.3) * 0.3f;
     q.y += sin(g_t6 + q.z * 0.4) * 0.1f;
     q.z += cos(g_t6 + q.z * 0.4) * 0.3f;
+
+    q.y *= g_height;
 
     return q;
 }
